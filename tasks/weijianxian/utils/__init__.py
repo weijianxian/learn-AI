@@ -31,6 +31,7 @@ except ImportError:
 
 
 def print(*args, **kwargs):
+    """自定义print函数，支持彩色输出"""
     data = "".join(args)
     for rule in changeRule:
         data = data.replace(rule[0], rule[1])
@@ -40,11 +41,31 @@ def print(*args, **kwargs):
 
 
 def input(*args, **kwargs):
+    """自定义input函数，支持彩色输出"""
     data = "".join(args)
     for rule in changeRule:
         data = data.replace(rule[0], rule[1])
     return builtin_input(data, **kwargs)
 
 
+def question(tip: str, requir: list = []) -> str:
+    """规范输入函数，自定义输入要求
+
+    :param tip: 输入提示
+
+    :param requir: 输入要求,默认不限制
+
+    :return: 输入结果
+
+    """
+
+    data = input(tip)
+    if data not in requir and requir != []:
+        print("[red]输入不合法，请重新输入[/]")
+        return question(tip, requir)
+    return data
+
+
 if __name__ == "__main__":
     print("[red]红色[/]")
+    data = question("[green]请输入1-3:[/]", ["1", "2", "3"])
