@@ -29,7 +29,7 @@ class Game:
         """
         游戏结束
         """
-        raise NotImplementedError("游戏结束")
+        print(f"[red]{'游戏结束':=^60}[/]")
 
     def onRoundStart(self):
         """
@@ -45,7 +45,7 @@ class Game:
         for player in self.players:
             if player.onFightPokemon.hp <= 0:
                 print(f"{player.name} 出战的 {player.onFightPokemon} 已经死亡")
-                self.__GameEnd__()
+                raise NotImplementedError("游戏结束")
 
     def getGame(self):
         return self
