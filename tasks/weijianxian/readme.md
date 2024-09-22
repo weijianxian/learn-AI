@@ -22,3 +22,7 @@ weijianxian
 │ │ __init__.py
 
 ```
+
+### 依赖
+
+使用 `pip install colorama` 实现彩色输出
