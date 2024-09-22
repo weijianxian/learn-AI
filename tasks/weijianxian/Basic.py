@@ -1,12 +1,21 @@
+import random as rd
+
+from utils import *
+
+
 class Player:
+
     def __init__(
         self,
         name: str,
+        fightPokemon: "Pokemon",
         pokemons: list["Pokemon"],
+        target: "Player" = None,
     ):
         self.name: str = name  # 玩家名称
-        self.onFightPokemon: Pokemon = None  # 当前出战的宝可梦
+        self.onFightPokemon: Pokemon = fightPokemon  # 当前出战的宝可梦
         self.pokemons: list[Pokemon] = pokemons  # 拥有的宝可梦
+        self.target: "Player" = target  # 对手
 
     def onRoundStart(self):
         """
@@ -28,6 +37,9 @@ class Player:
             raise ValueError("宝可梦不在列表中")
 
         self.onFightPokemon = pokemon
+
+    def getOnFightPokemon(self):
+        return self.onFightPokemon
 
 
 class Pokemon:
@@ -56,7 +68,34 @@ class Pokemon:
 
     def onRoundBegin(self):
         """
-        宝可梦战斗回合开始
+        宝可梦战斗回合开始,处理状态,计算闪避率等
+        """
+        pass
+
+    def fight(self, target: "Player") -> tuple[int, str]:
+        """
+        宝可梦战斗
+        """
+        # 闪避判断
+        if rd.randint(0, 100) < target.onFightPokemon.evasion:
+            return (False, 0, f"{target} 闪避了攻击")
+
+        # 破防判断
+        elif self.attack < target.onFightPokemon.defense:
+            return (False, 0, f"{target} 防御力过高,无法破防")
+
+        # 攻击
+        target.onFightPokemon.hp -= self.attack - target.onFightPokemon.defense
+
+        return (
+            True,
+            self.attack - target.onFightPokemon.defense,
+            f"{self} 对 {target} 造成了 {self.attack - target.onFightPokemon.defense} 伤害",
+        )
+
+    def skill(self, target: "Pokemon"):
+        """
+        宝可梦使用技能
         """
         pass
 

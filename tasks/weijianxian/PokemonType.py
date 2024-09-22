@@ -7,7 +7,7 @@ class WaterType(PokemonType):
     水属性宝可梦类型类
     """
 
-    name = "水"
+    name = "[cyan]水[/]"
     strong_against = []
     weak_against = []
 
@@ -24,7 +24,7 @@ class GrassType(PokemonType):
     草属性宝可梦类型类
     """
 
-    name = "草"
+    name = "[green]草[/]"
     strong_against = []
     weak_against = []
 
@@ -34,7 +34,7 @@ class FireType(PokemonType):
     火属性宝可梦类型类
     """
 
-    name = "火"
+    name = "[red]火[/]"
     strong_against = []
     weak_against = []
 
@@ -44,7 +44,7 @@ class ElectricType(PokemonType):
     电属性宝可梦类型类
     """
 
-    name = "电"
+    name = "[yellow]电[/]"
     strong_against = []
     weak_against = []
 
